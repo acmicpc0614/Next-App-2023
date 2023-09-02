@@ -12,6 +12,8 @@ const lexed = Lexend_Deca({
   variable: '--font-lexed',
 });
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: {

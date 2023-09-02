@@ -55,7 +55,6 @@ const sponsors = [
 ];
 
 import Link from "next/link";
-export const dynamic = "force-dynamic";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
