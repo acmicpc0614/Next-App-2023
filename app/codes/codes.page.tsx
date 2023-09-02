@@ -2,13 +2,162 @@
 import Link from "next/link";
 import Image from "next/image";
 import NEXTNegroSloganRosado from "/public/NextLogoRosado.png";
-import QRScanner from "@/components/QRScanner";
 import { Drawer } from "vaul";
+import React, { useEffect, useState } from "react";
+import { QrReader, OnResultFunction, useQrReader } from "react-qr-reader";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+export const CODES = [
+  {
+    code: "gHQS5BoyR2?",
+    company: "Kiwibot",
+  },
+  {
+    code: "123456?",
+    company: "Meta",
+  },
+];
 
 export default function Login() {
+  const [data, setData] = useState("No result");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [userCodes, setUserCodes] = useState<any[]>([]);
+
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const getCodes = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data } = await supabase
+        .from("profiles")
+        .select("codes")
+        .eq("id", user?.id);
+
+      if (data) {
+        setUserCodes(data[0].codes);
+
+        // check if the user have all the codes
+        const foundAllCodes = CODES.every((code) => {
+          return !!data[0].codes.find((c: { code: string; }) => c.code === code.code);
+        });
+
+        if (foundAllCodes) {
+          // redirect to the winner page
+          window.location.href = "/winner";
+        }
+      }
+
+      setLoading(false);
+    };
+
+    getCodes();
+  }, [supabase, setUserCodes]);
+
+  const onScan: OnResultFunction = (result, error) => {
+    if (!!result) {
+      setData(result?.getText());
+      const url = new URL(result?.getText() as string);
+
+      const code = url.searchParams.get("code");
+
+      // find the code in the CODES array
+      const foundCode = CODES.find((c) => c.code === code);
+
+      if (!!foundCode) {
+        handleSaveCode(foundCode);
+      }
+    }
+
+    if (!!error) {
+      console.info(error);
+    }
+  };
+
+  const handleSaveCode = async (_code: { code: string; company: string }) => {
+    setLoading(true);
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // keep the previous codes
+    const codes = [...userCodes];
+
+    // add the new code
+    codes.push(_code);
+
+    // update the user profile with the new code
+    await supabase.from("profiles").update({ codes }).eq("id", user?.id);
+
+    // reload the page
+    window.location.reload();
+  };
+
+  const renderCompanyCodes = () => {
+    if (loading) {
+      return (
+        <div className="space-y-2">
+          <div className=" shadow rounded-md  max-w-sm w-full mx-auto">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-full bg-slate-200 h-10 w-full"></div>
+            </div>
+          </div>
+          <div className=" shadow rounded-md  max-w-sm w-full mx-auto">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-full bg-slate-200 h-10 w-full"></div>
+            </div>
+          </div>
+          <div className=" shadow rounded-md  max-w-sm w-full mx-auto">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-full bg-slate-200 h-10 w-full"></div>
+            </div>
+          </div>
+          <div className=" shadow rounded-md  max-w-sm w-full mx-auto">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-full bg-slate-200 h-10 w-full"></div>
+            </div>
+          </div>
+          <div className=" shadow rounded-md  max-w-sm w-full mx-auto">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-full bg-slate-200 h-10 w-full"></div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {CODES.map((code) => {
+          // check if the user has already scanned this code
+          const foundCode = userCodes.find((c) => c.code === code.code);
+
+          const unFoundedCodeClassName = "bg-white rounded-2xl py-4 px-2";
+          const foundedCodeClassName =
+            "bg-green-400 rounded-2xl py-4 px-2 border-white border-2 text-white font-bold";
+
+          return (
+            <div
+              className={
+                foundCode ? foundedCodeClassName : unFoundedCodeClassName
+              }
+              key={code.code}
+            >
+              <h1>{code.company}</h1>
+            </div>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div
-      className=" justify-center gap-2 bg-gradient-to-t from-[#6460FF] to-[#0600FF]"
+      className="w-full h-full min-h-screen justify-center gap-2 bg-gradient-to-t from-[#6460FF] to-[#0600FF]"
       vaul-drawer-wrapper=""
     >
       <Drawer.Root>
@@ -77,26 +226,43 @@ export default function Login() {
               ABRIR SCANER
             </button>
           </Drawer.Trigger>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
-          <div className="bg-white rounded-2xl py-4 px-2">
-            <h1>Empresa #1</h1>
-          </div>
+          {renderCompanyCodes()}
         </form>
-        <QRScanner />
+        <Drawer.Portal>
+          <Drawer.Overlay
+            data-testid="ovarlay"
+            className="fixed inset-0 bg-black/40"
+          />
+          <Drawer.Content
+            data-testid="content"
+            className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0"
+          >
+            <div className="p-4 bg-white rounded-t-[10px] flex-1">
+              <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
+              <div className="max-w-md mx-auto">
+                <Drawer.Title className="font-medium mb-4">
+                  Escanea el código
+                </Drawer.Title>
+
+                {loading ? (
+                  <div className="flex justify-center items-center ">
+                    <div className="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400 ">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gray-200 rounded-full border-2 border-white"></div>
+                    </div>
+                  </div>
+                ) : (
+                  <QrReader
+                    constraints={{ facingMode: "environment" }}
+                    onResult={onScan}
+                    className="w-full h-full"
+                    scanDelay={1000}
+                  />
+                )}
+              </div>
+            </div>
+          </Drawer.Content>
+          <Drawer.Overlay />
+        </Drawer.Portal>
       </Drawer.Root>
     </div>
   );
