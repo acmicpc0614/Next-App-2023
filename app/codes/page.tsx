@@ -2,13 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import NEXTNegroSloganRosado from "/public/NextLogoRosado.png";
-import QRScanner from "@/components/QRScanner";
 import { Drawer } from "vaul";
+import React, { useState } from "react";
+import { QrReader } from "react-qr-reader";
 
 export default function Login() {
+  const [data, setData] = useState("No result");
+
   return (
     <div
-      className=" justify-center gap-2 bg-gradient-to-t from-[#6460FF] to-[#0600FF]"
+      className="w-full h-full justify-center gap-2 bg-gradient-to-t from-[#6460FF] to-[#0600FF]"
       vaul-drawer-wrapper=""
     >
       <Drawer.Root>
@@ -96,7 +99,91 @@ export default function Login() {
             <h1>Empresa #1</h1>
           </div>
         </form>
-        <QRScanner />
+        <Drawer.Portal>
+          <Drawer.Overlay
+            data-testid="ovarlay"
+            className="fixed inset-0 bg-black/40"
+          />
+          <Drawer.Content
+            data-testid="content"
+            className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0"
+          >
+            <div className="p-4 bg-white rounded-t-[10px] flex-1">
+              <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
+              <div className="max-w-md mx-auto">
+                <Drawer.Title className="font-medium mb-4">
+                  Unstyled drawer for React.
+                </Drawer.Title>
+
+                <QrReader
+                  constraints={{ facingMode: "environment" }}
+                  onResult={(result, error) => {
+                    if (!!result) {
+                      setData(result?.getText());
+                    }
+
+                    if (!!error) {
+                      console.info(error);
+                    }
+                  }}
+                  className="w-full h-full"
+                />
+                <p>{data}</p>
+              </div>
+            </div>
+            <div className="p-4 bg-zinc-100 border-t border-zinc-200 mt-auto">
+              <div className="flex gap-6 justify-end max-w-md mx-auto">
+                <a
+                  className="text-xs text-zinc-600 flex items-center gap-0.25"
+                  href="https://github.com/emilkowalski/vaul"
+                  target="_blank"
+                >
+                  GitHub
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    aria-hidden="true"
+                    className="w-3 h-3 ml-1"
+                  >
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                    <path d="M15 3h6v6"></path>
+                    <path d="M10 14L21 3"></path>
+                  </svg>
+                </a>
+                <a
+                  className="text-xs text-zinc-600 flex items-center gap-0.25"
+                  href="https://twitter.com/emilkowalski_"
+                  target="_blank"
+                >
+                  Twitter
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    aria-hidden="true"
+                    className="w-3 h-3 ml-1"
+                  >
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                    <path d="M15 3h6v6"></path>
+                    <path d="M10 14L21 3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </Drawer.Content>
+          <Drawer.Overlay />
+        </Drawer.Portal>
       </Drawer.Root>
     </div>
   );
