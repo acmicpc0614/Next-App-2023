@@ -55,6 +55,8 @@ export default function Login() {
         action="/auth/sign-in"
         method="post"
       >
+        <Messages />
+
         <div className="text-center">
           <h1 className="text-white font-bold text-xl">INGRESA TUS DATOS</h1>
         </div>
@@ -86,7 +88,6 @@ export default function Login() {
         >
           EMPEZAR MI RECORRIDO
         </button>
-        <Messages />
       </form>
 
       <div className="px-8 text-center text-white my-5">
