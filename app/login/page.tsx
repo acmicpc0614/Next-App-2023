@@ -8,7 +8,7 @@ export default function Login() {
     <div className="flex-1 flex flex-col w-full  sm:max-w-md justify-center gap-2 bg-gradient-to-t from-[#6460FF] to-[#0600FF]">
       <Link
         href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm text-white"
+        className="absolute left-8 top-8 pt-2 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ export default function Login() {
         Atrás
       </Link>
 
-      <div className="flex w-full justify-center content-center pt-10">
+      <div className="flex w-full justify-center content-center pt-5">
         <Image
           src={NEXTNegroSloganRosado}
           quality={100}
@@ -51,25 +51,51 @@ export default function Login() {
       </div>
 
       <form
-        className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground px-8"
+        className="flex-1 flex flex-col w-full gap-2 text-foreground px-8 mt-10"
         action="/auth/sign-in"
         method="post"
       >
-        <label className="text-md" htmlFor="email">
-          Email
+        <div className="text-center">
+          <h1 className="text-white font-bold text-xl">INGRESA TUS DATOS</h1>
+        </div>
+        <label className="text-md text-white" htmlFor="name">
+          Nombre
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="email"
-          placeholder="you@example.com"
+          className="rounded-md px-4 py-2 bg-inherit border mb-6 text-white"
+          name="name"
+          placeholder="Pepito Perez"
           required
         />
 
-        <button className="bg-green-700 rounded px-4 py-2 text-white mb-2">
-          Sign In
+        <label className="text-md text-white" htmlFor="email">
+          Correo electrónico
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6 text-white"
+          name="email"
+          placeholder="nombre@ejemplo.com"
+          required
+        />
+
+        <button
+          className="bg-green-700 rounded-xl px-4 py-2 text-white mb-2 font-bold"
+          style={{
+            backgroundColor: "#FF0086",
+          }}
+        >
+          EMPEZAR MI RECORRIDO
         </button>
         <Messages />
       </form>
+
+      <div className="px-8 text-center text-white my-5">
+        <h1 className="font-bold text-lg">INSTRUCCIONES:</h1>
+        <p className="font-normal text-sm">
+          Debes pasar por los stands de todas las marcas e ingresar sus
+          respectivos códigos para poder redimir tu premio.
+        </p>
+      </div>
     </div>
   );
 }
