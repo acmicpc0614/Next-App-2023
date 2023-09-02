@@ -33,7 +33,6 @@ const Winner = () => {
             .from("profiles")
             .update({
               winner_code: winnerCode,
-              winning_timestamp: currentTimestamp,
             })
             .eq("id", user?.id);
 
