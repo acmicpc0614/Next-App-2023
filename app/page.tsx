@@ -87,11 +87,19 @@ export default async function Index() {
           className="mt-10"
         />
 
-        <Link href={"/login"} className="py-5">
-          <div className="bg-green-600 w-fit px-5 py-2 rounded-lg">
-            <h1 className="text-stone-50 font-bold --font-lexed">EMPEZAR</h1>
-          </div>
-        </Link>
+        {user ? (
+          <Link href={"/codes"} className="py-5">
+            <div className="bg-red-600 w-fit px-5 py-2 rounded-lg">
+              <h1 className="text-stone-50 font-bold --font-lexed">CONTINUAR RECORRIDO</h1>
+            </div>
+          </Link>
+        ) : (
+          <Link href={"/login"} className="py-5">
+            <div className="bg-green-600 w-fit px-5 py-2 rounded-lg">
+              <h1 className="text-stone-50 font-bold --font-lexed">EMPEZAR</h1>
+            </div>
+          </Link>
+        )}
       </div>
       <div
         style={{
@@ -99,7 +107,7 @@ export default async function Index() {
         }}
         className=" flex flex-col items-center justify-center space-y-10 pb-20"
       >
-        <div className="w-full flex justify-center items-center flex-col px-4">
+        <div className="w-full flex justify-center items-center flex-col px-2">
           <h1 className="--font-lexed font-bold text-white text-2xl text-center">
             FERIA SOBRE TECNOLOGÍA E INNOVACIÓN
           </h1>
