@@ -94,15 +94,25 @@ export default function Login() {
           onChange={setOtp}
           numInputs={6}
           renderSeparator={<span className="text-white">-</span>}
-          renderInput={(props) => (
-            <input {...props} className="p-4 rounded-xl text-black" />
-          )}
+          renderInput={(props) => <input {...props} />}
           containerStyle={{
             display: "flex",
             justifyContent: "space-evenly",
             width: "100%",
             marginTop: "20px",
             marginBottom: "20px",
+            color: "black",
+          }}
+          inputType="number"
+          inputStyle={{
+            padding: "10px",
+            borderRadius: "4px",
+            border: "1px solid rgba(0,0,0,0.3)",
+            width: "40px",
+            fontSize: "20px",
+            boxSizing: "border-box",
+            backgroundColor: "white",
+            color: "black",
           }}
         />
         <button
