@@ -5,7 +5,10 @@ import NEXTNegroSloganRosado from "/public/NextLogoRosado.png";
 import { Drawer } from "vaul";
 import React, { useEffect, useState } from "react";
 import { QrReader, OnResultFunction, useQrReader } from "react-qr-reader";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  User,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 
 export const CODES = [
   {
@@ -23,6 +26,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [userCodes, setUserCodes] = useState<any[]>([]);
+  const [currentUser, setCurrentUser] = useState<User>();
 
   const supabase = createClientComponentClient();
 
@@ -31,6 +35,12 @@ export default function Login() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+
+      setCurrentUser(user);
 
       const { data } = await supabase
         .from("profiles")
@@ -42,7 +52,9 @@ export default function Login() {
 
         // check if the user have all the codes
         const foundAllCodes = CODES.every((code) => {
-          return !!data[0].codes.find((c: { code: string; }) => c.code === code.code);
+          return !!data[0].codes.find(
+            (c: { code: string }) => c.code === code.code
+          );
         });
 
         if (foundAllCodes) {
@@ -200,8 +212,8 @@ export default function Login() {
           <h1 className="font-extrabold text-4xl">INGRESA LOS CÓDIGOS</h1>
 
           <p className="text-sm">
-            Ingresa los respectivos códigos de todas las marcas para participar
-            por increíbles premios.
+            Hola, {currentUser?.user_metadata.full_name}. Ingresa los respectivos
+            códigos de todas las marcas para participar por increíbles premios.
           </p>
         </div>
 
