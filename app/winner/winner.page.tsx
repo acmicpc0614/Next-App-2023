@@ -3,7 +3,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import NEXTNegroSloganRosado from "/public/NEXTNegroSloganRosado.png";
-import Cuadrado from "/public/Cuadrado1.png";
+import Cuadrado from "/public/cuadrado1.png";
 import Robot from "/public/Robot4.png";
 
 import Link from "next/link";
