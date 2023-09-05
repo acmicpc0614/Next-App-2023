@@ -12,12 +12,44 @@ import {
 
 export const CODES = [
   {
-    code: "gHQS5BoyR2?",
-    company: "Kiwibot",
+    code: "ts3KpUMW",
+    company: "Nova",
   },
   {
-    code: "123456?",
-    company: "Meta",
+    code: "gHQS5BoyR2?",
+    company: "PolygonUS",
+  },
+  {
+    code: "va5fb4YC",
+    company: "Kiwi",
+  },
+  {
+    code: "aW4a4g7X",
+    company: "Fun factor",
+  },
+  {
+    code: "842TMZgD",
+    company: "Landian meta",
+  },
+  {
+    code: "Rz2zSN5w",
+    company: "DSI",
+  },
+  {
+    code: "LP8xFwJe",
+    company: "Uriana",
+  },
+  {
+    code: "U9rBKM29",
+    company: "Jedburghco",
+  },
+  {
+    code: "9mm6Y3Hn",
+    company: "Forzautos",
+  },
+  {
+    code: "BM1bTKg7",
+    company: "Nodo",
   },
 ];
 
@@ -212,8 +244,9 @@ export default function Login() {
           <h1 className="font-extrabold text-4xl">INGRESA LOS CÓDIGOS</h1>
 
           <p className="text-sm">
-            Hola, {currentUser?.user_metadata.full_name}. Ingresa los respectivos
-            códigos de todas las marcas para participar por increíbles premios.
+            Hola, {currentUser?.user_metadata.full_name}. Ingresa los
+            respectivos códigos de todas las marcas para participar por
+            increíbles premios.
           </p>
         </div>
 
