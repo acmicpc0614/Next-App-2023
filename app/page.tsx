@@ -4,7 +4,8 @@ import Image from "next/image";
 import landingBackground from "../public/Landing-bg-1.png";
 import NextLogoRosado from "../public/NextLogoRosado.png";
 
-import LogoKiwibot from "../public/LogoKiwibot.png";
+
+import LogoKiwibot from "../public/kiwibotAzul.png";
 import LogoQuind from "../public/LogoQuind.png";
 import LogoBancolombia from "../public/LogoBancolombia.png";
 import LogoNodo from "../public/LogoNodo.png";
@@ -14,6 +15,7 @@ import LoogoLandian from "../public/LoogoLandian.png";
 import LogoPolygonUs from "../public/LogoPolygonUs.png";
 import LogoEafit from "../public/LogoEafit.png";
 import LogoNova from "../public/LogoNova.png";
+
 
 const sponsors = [
   {
@@ -55,6 +57,7 @@ const sponsors = [
 ];
 
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
@@ -82,7 +85,7 @@ export default async function Index() {
           src={NextLogoRosado}
           quality={100}
           alt="Next logo"
-          width={250}
+          width={300}
           className="mt-10"
         />
 
@@ -116,14 +119,15 @@ export default async function Index() {
           style={{
             backgroundColor: "#FF4800",
           }}
-          className="text-white p-5 mt-10 w-11/12 rounded-r-xl space-y-6 self-start"
+          className="text-white p-5 mt-10 w-11/12 rounded-r-xl self-start"
         >
           <p>
-            NEXT es el macroevento de NOVA que se llevará a cabo este próximo 5
-            de septiembre.
+            NEXT es el macroevento de NOVA que se llevará a cabo este próximo
           </p>
+          <p className="mt-0 mb-0 pt-0 pb-0 text-xl"> 5
+            de septiembre.</p>
 
-          <p>
+          <p className="mt-5">
             En este evento buscamos acercar la tecnología, la innovación y en
             especial la Inteligencia Artificial a toda la comunidad Eafitense
             por medio de charlas, talleres y stands interactivos para conocer un
@@ -200,7 +204,7 @@ export default async function Index() {
           <div>
             <div className="grid grid-cols-2 gap-10 items-stretch place-content-stretch place-items-center">
               {sponsors.map((sponsor) => (
-                <div className="w-24 h-24">
+                <div className="w-30 h-30">
                   <Image
                     src={sponsor.logo}
                     quality={100}
@@ -213,6 +217,7 @@ export default async function Index() {
               ))}
             </div>
           </div>
+          <Footer></Footer>
         </div>
       </div>
     </div>

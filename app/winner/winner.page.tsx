@@ -7,6 +7,7 @@ import Cuadrado from "/public/cuadrado1.png";
 import Robot from "/public/Robot4.png";
 
 import Link from "next/link";
+import Footer from "@/components/Footer";
 const Winner = () => {
   const [loading, setLoading] = useState(true);
   const [winnerCode, setWinnerCode] = useState("");
@@ -124,6 +125,7 @@ const Winner = () => {
           <p>wxp3sp</p>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

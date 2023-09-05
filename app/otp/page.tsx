@@ -6,6 +6,7 @@ import OtpInput from "react-otp-input";
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useSearchParams } from "next/navigation";
+import Footer from "@/components/Footer";
 
 export default function Login() {
   const supabase = createClientComponentClient();
@@ -124,6 +125,7 @@ export default function Login() {
           EMPEZAR MI RECORRIDO
         </button>
       </form>
+      <Footer></Footer>
     </div>
   );
 }

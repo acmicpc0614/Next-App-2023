@@ -2,6 +2,8 @@ import Link from "next/link";
 import Messages from "./messages";
 import Image from "next/image";
 import NEXTNegroSloganRosado from "/public/NEXTNegroSloganRosado.png";
+import Footer from "@/components/Footer";
+
 
 export default function Login() {
   return (
@@ -93,10 +95,11 @@ export default function Login() {
       <div className="px-8 text-center text-white my-5">
         <h1 className="font-bold text-lg">INSTRUCCIONES:</h1>
         <p className="font-normal text-sm">
-          Debes pasar por los stands de todas las marcas e ingresar sus
-          respectivos códigos para poder redimir tu premio.
+        Se debe participar en las actividades de cada empresa y conocer sus productos, para así obtener su codigo QR y redimir tu premio, adicionalmente podrás ser parte de la rifas de varias sorpresas.
+        <br/> <p className="font-bold">¡Muchas gracias por participar! Ve a la carpa de NOVA para reclamar un obsequio.</p>
         </p>
       </div>
+      <Footer/>
     </div>
   );
 }
