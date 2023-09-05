@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import WinnerPage from "./winner.page";
 
-export const CODES = [
+const CODES = [
   {
     code: "ts3KpUMW",
     company: "Nova",

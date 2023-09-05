@@ -10,7 +10,7 @@ import {
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 
-export const CODES = [
+const CODES = [
   {
     code: "ts3KpUMW",
     company: "Nova",
