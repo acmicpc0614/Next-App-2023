@@ -4,16 +4,19 @@ import Image from "next/image";
 import landingBackground from "../public/Landing-bg-1.png";
 import NextLogoRosado from "../public/NextLogoRosado.png";
 
-import LogoKiwibot from "../public/LogoKiwibot.png";
-import LogoQuind from "../public/LogoQuind.png";
-import LogoBancolombia from "../public/LogoBancolombia.png";
-import LogoNodo from "../public/LogoNodo.png";
-import LogoHatsu from "../public/LogoHatsu.png";
-import LogoPapitas from "../public/LogoPapitas.png";
-import LoogoLandian from "../public/LoogoLandian.png";
 import LogoPolygonUs from "../public/LogoPolygonUs.png";
+import LogoKiwibot from "../public/kiwibotAzul.png";
+import LogoNodo from "../public/LogoNodo.png";
+import LoogoLandian from "../public/LoogoLandian.png";
+import DSI from "../public/1DSI LOGO NEGRO TRANSPARENTE.png";
+import Jed from "../public/1jedburghlogo_logomark_black-f86e850116fe8353d04ea49004bdd492.png";
+import Monterrojo from "../public/1logo Monte Rojo 2018-2_Mesa de trabajo 1.png";
+import LogoHatsu from "../public/LogoHatsu.png";
+import MediaLab from "../public/1LOGO-MEDIALAB.png";
+import Apeiron from "../public/1apeironblack.png";
 import LogoEafit from "../public/LogoEafit.png";
-import LogoNova from "../public/LogoNova.png";
+
+
 
 const sponsors = [
   {
@@ -21,40 +24,46 @@ const sponsors = [
     logo: LogoKiwibot,
   },
   {
-    name: "Quind",
-    logo: LogoQuind,
+    name: "MediaLab",
+    logo: MediaLab,
+  },
+
+  {
+    name: "Landian",
+    logo: LoogoLandian,
   },
   {
-    name: "Bancolombia",
-    logo: LogoBancolombia,
-  },
-  {
-    name: "Nodo",
-    logo: LogoNodo,
+    name: "Jed",
+    logo: Jed,
   },
   {
     name: "Hatsu",
     logo: LogoHatsu,
   },
   {
-    name: "Papitas",
-    logo: LogoPapitas,
-  },
-  {
-    name: "Landian",
-    logo: LoogoLandian,
+    name: "DSI",
+    logo: DSI,
   },
   {
     name: "Polygon",
     logo: LogoPolygonUs,
   },
   {
-    name: "Eafit",
-    logo: LogoEafit,
+    name: "Monte",
+    logo: Monterrojo,
+  },
+  {
+    name: "Nodo",
+    logo: LogoNodo,
+  },
+  {
+    name: "Ape",
+    logo: Apeiron,
   },
 ];
 
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
@@ -82,7 +91,7 @@ export default async function Index() {
           src={NextLogoRosado}
           quality={100}
           alt="Next logo"
-          width={250}
+          width={300}
           className="mt-10"
         />
 
@@ -116,14 +125,15 @@ export default async function Index() {
           style={{
             backgroundColor: "#FF4800",
           }}
-          className="text-white p-5 mt-10 w-11/12 rounded-r-xl space-y-6 self-start"
+          className="text-white p-5 mt-10 w-11/12 rounded-r-xl self-start"
         >
           <p>
-            NEXT es el macroevento de NOVA que se llevará a cabo este próximo 5
-            de septiembre.
+            NEXT es el macroevento de NOVA que se llevará a cabo este próximo
           </p>
+          <p className="mt-0 mb-0 pt-0 pb-0 text-xl"> 5
+            de septiembre.</p>
 
-          <p>
+          <p className="mt-5">
             En este evento buscamos acercar la tecnología, la innovación y en
             especial la Inteligencia Artificial a toda la comunidad Eafitense
             por medio de charlas, talleres y stands interactivos para conocer un
@@ -200,7 +210,7 @@ export default async function Index() {
           <div>
             <div className="grid grid-cols-2 gap-10 items-stretch place-content-stretch place-items-center">
               {sponsors.map((sponsor) => (
-                <div className="w-24 h-24">
+                <div className="w-30 h-30">
                   <Image
                     src={sponsor.logo}
                     quality={100}
@@ -213,6 +223,13 @@ export default async function Index() {
               ))}
             </div>
           </div>
+          <Image
+            src={LogoEafit}
+            quality={100}
+            alt="Eafit logo"
+            className="my-2 mx-2 mt-5"
+          />
+          <Footer></Footer>
         </div>
       </div>
     </div>

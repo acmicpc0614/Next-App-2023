@@ -9,6 +9,7 @@ import {
   User,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
+import Footer from "@/components/Footer";
 
 const CODES = [
   {
@@ -309,6 +310,7 @@ export default function Login() {
           <Drawer.Overlay />
         </Drawer.Portal>
       </Drawer.Root>
+      <Footer></Footer>
     </div>
   );
 }
